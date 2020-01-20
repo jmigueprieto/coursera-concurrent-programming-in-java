@@ -12,13 +12,15 @@ public final class BankTransactionsUsingObjectIsolation
      */
     @Override
     public void issueTransfer(final int amount, final Account src,
-            final Account dst) {
+                              final Account dst) {
         /*
          * TODO implement issueTransfer using object-based isolation instead of
          * global isolation, based on the reference code provided in
          * BankTransactionsUsingGlobalIsolation. Keep in mind that isolation
          * must be applied to both src and dst.
          */
-        throw new UnsupportedOperationException();
+        isolated(src, dst, () -> {
+            src.performTransfer(amount, dst);
+        });
     }
 }
